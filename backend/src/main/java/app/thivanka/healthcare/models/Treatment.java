@@ -2,6 +2,7 @@ package app.thivanka.healthcare.models;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Treatment")
+@Table(name = "\"Treatment\"")
 public class Treatment {
 	
 	@Id
@@ -22,7 +23,10 @@ public class Treatment {
 	@JoinTable(name = "no")
 	private Patient patient;
 
+	@Column(nullable = false)
 	private LocalDate treat_date;
+
+	@Column(nullable = false)
 	private String treat_details;
 	
 	//setters

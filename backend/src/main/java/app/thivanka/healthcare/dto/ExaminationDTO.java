@@ -7,7 +7,7 @@ import app.thivanka.healthcare.models.Patient;
 public class ExaminationDTO{
 	
 	private Long exam_id;
-	private Patient patient;
+	private Long no;
 	private LocalDate exam_date;
 	private int bp;//blood pressure
 	private int hp; //heart pressure
@@ -19,8 +19,8 @@ public class ExaminationDTO{
 		this.exam_id = exam_id;
 	}
 	
-	public void setPatient(Patient patient) {
-		this.patient = patient;
+	public void setNo(Long no) {
+		this.no = no;
 	}
 	
 	
@@ -50,8 +50,8 @@ public class ExaminationDTO{
 		return exam_id;
 	}
 	
-	public Patient getPatient() {
-		return patient;
+	public Long getNo() {
+		return no;
 	}
 	
 	public LocalDate getExam_date() {
