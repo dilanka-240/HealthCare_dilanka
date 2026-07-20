@@ -33,6 +33,8 @@ public class AddExaminationImpl implements AddExamination{
 		examination.setPatient(patient);
 
 		examinationRepository.save(examination);
+
+		
 		return ExaminationMapper.toDto(examination);
 	}
 }
