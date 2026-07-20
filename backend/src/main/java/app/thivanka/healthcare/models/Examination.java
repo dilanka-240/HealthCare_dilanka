@@ -19,7 +19,7 @@ public class Examination{
 	private Long exam_id;
 
 	@ManyToOne
-	@JoinColumn(name = "no", nullable = false)
+	@JoinColumn(name = "no")
 	private Patient patient;
 
 
