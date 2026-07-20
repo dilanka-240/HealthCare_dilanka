@@ -12,7 +12,7 @@ public class InvestigationDTO{
 	
 	//setters
 	
-	public void setInvId(Long inv_id) {
+	public void setInv_id(Long inv_id) {
 		this.inv_id = inv_id;
 	}
 	
@@ -20,11 +20,11 @@ public class InvestigationDTO{
 		this.no = no;
 	}
 	
-	public void setInvDetails(String inv_details) {
+	public void setInv_details(String inv_details) {
 		this.inv_details = inv_details;
 	}
 	
-	public void setInvDate(LocalDate inv_date) {
+	public void setInv_date(LocalDate inv_date) {
 		this.inv_date = inv_date;
 	}
 	
@@ -34,7 +34,7 @@ public class InvestigationDTO{
 	
 	//getters
 	
-	public Long getInvId() {
+	public Long getInv_id() {
 		return inv_id;
 	}
 	
@@ -42,11 +42,11 @@ public class InvestigationDTO{
 		return no;
 	}
 	
-	public String getInvDetails() {
+	public String getInv_details() {
 		return inv_details;
 	}
 	
-	public LocalDate getInvDate() {
+	public LocalDate getInv_date() {
 		return inv_date;
 	}
 	

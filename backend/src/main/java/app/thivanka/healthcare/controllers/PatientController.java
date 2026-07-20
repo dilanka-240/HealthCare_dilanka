@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.thivanka.healthcare.dto.ExaminationDTO;
+import app.thivanka.healthcare.dto.InvestigationDTO;
 import app.thivanka.healthcare.dto.PatientDTO;
 import app.thivanka.healthcare.dto.PatientInformationDTO;
 import app.thivanka.healthcare.dto.TreatmentDTO;
 import app.thivanka.healthcare.services.AddExamination;
+import app.thivanka.healthcare.services.AddInvestigation;
 import app.thivanka.healthcare.services.AddTreatment;
 import app.thivanka.healthcare.services.CreatePatient;
 import app.thivanka.healthcare.services.ShowPatientInfo;
@@ -33,15 +35,20 @@ public class PatientController{
 	
 	@Autowired
 	private final AddTreatment addTreatment;
+	
+	@Autowired
+	private final AddInvestigation addInvestigation;
 
 	public PatientController(CreatePatient createPatient,
 							ShowPatientInfo showPatientInfo,
 							AddExamination addExamination,
-							AddTreatment addTreatment) {
+							AddTreatment addTreatment,
+							AddInvestigation addInvestigation) {
 		this.createPatient = createPatient;
 		this.showPatientInfo = showPatientInfo;
 		this.addExamination = addExamination;
 		this.addTreatment = addTreatment;
+		this.addInvestigation = addInvestigation;
 	}
 
 	@PostMapping("/create")
@@ -62,5 +69,10 @@ public class PatientController{
 	@PostMapping("/treat")
 	public ResponseEntity<TreatmentDTO> addTreatment(@RequestBody TreatmentDTO treatmentDto){
 		return ResponseEntity.ok(addTreatment.addTreatment(treatmentDto));
+	}
+	
+	@PostMapping("/inv")
+	public ResponseEntity<InvestigationDTO> addInvestigation(@RequestBody InvestigationDTO investigationDto){
+		return ResponseEntity.ok(addInvestigation.addInvestigation(investigationDto));
 	}
 }
