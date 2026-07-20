@@ -8,7 +8,6 @@ public class TreatmentMapper{
 	public static Treatment toEntity(TreatmentDTO treatmentDto) {
 		Treatment treatment = new Treatment();
 		treatment.setTreat_id(treatmentDto.getTreat_id());
-		treatment.setPatient(treatmentDto.getPatient());
 		treatment.setTreat_details(treatmentDto.getTreat_details());
 		treatment.setTreat_date(treatmentDto.getTreat_date());
 		return treatment; 
@@ -17,7 +16,6 @@ public class TreatmentMapper{
 	public static TreatmentDTO toDTO(Treatment treatment) {
 		TreatmentDTO treatmentDto = new TreatmentDTO();
 		treatmentDto.setTreat_id(treatment.getTreat_id());
-		treatmentDto.setPatient(treatment.getPatient());
 		treatmentDto.setTreat_details(treatment.getTreat_details());
 		treatmentDto.setTreat_date(treatment.getTreat_date());
 		return treatmentDto;

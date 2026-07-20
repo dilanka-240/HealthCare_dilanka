@@ -6,7 +6,7 @@ import app.thivanka.healthcare.models.Patient;
 
 public class TreatmentDTO{
 	private Long treat_id;
-	private Patient patient;
+	Long no;
 	private LocalDate treat_date;
 	private String treat_details;
 	
@@ -16,8 +16,8 @@ public class TreatmentDTO{
 		this.treat_id = treat_id;
 	}
 	
-	public void setPatient(Patient patient) {
-		this.patient = patient;
+	public void setNo(Long no) {
+		this.no = no;
 	}
 	
 	public void setTreat_date(LocalDate treat_date) {
@@ -35,8 +35,8 @@ public class TreatmentDTO{
 		return treat_id;
 	}
 	
-	public Patient getPatient() {
-		return patient;
+	public Long getNo() {
+		return no;
 	}
 	
 	public LocalDate getTreat_date() {
