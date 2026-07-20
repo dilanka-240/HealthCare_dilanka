@@ -2,6 +2,7 @@ package app.thivanka.healthcare.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import app.thivanka.healthcare.dto.TreatmentDTO;
 import app.thivanka.healthcare.mappers.TreatmentMapper;
@@ -14,8 +15,11 @@ public class AddTreatmentImpl implements AddTreatment{
 	@Autowired
 	TreatmentRepository treatmentRepository;
 	
+	@Override
+	@Transactional
 	public TreatmentDTO addTreatment(TreatmentDTO treatmentDto) {
 		Treatment treatment = TreatmentMapper.toEntity(treatmentDto);
+		treatmentRepository.save(treatment);
 		return TreatmentMapper.toDTO(treatment);
 	}
 	

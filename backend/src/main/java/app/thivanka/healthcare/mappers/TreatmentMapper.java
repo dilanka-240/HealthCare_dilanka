@@ -17,7 +17,7 @@ public class TreatmentMapper{
 	public static TreatmentDTO toDTO(Treatment treatment) {
 		TreatmentDTO treatmentDto = new TreatmentDTO();
 		treatmentDto.setTreat_id(treatment.getTreat_id());
-		treatmentDto.setPatient(treatmentDto.getPatient());
+		treatmentDto.setPatient(treatment.getPatient());
 		treatmentDto.setTreat_details(treatment.getTreat_details());
 		treatmentDto.setTreat_date(treatment.getTreat_date());
 		return treatmentDto;
