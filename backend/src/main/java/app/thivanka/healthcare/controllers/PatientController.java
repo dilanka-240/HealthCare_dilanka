@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +15,13 @@ import app.thivanka.healthcare.dto.InvestigationDTO;
 import app.thivanka.healthcare.dto.PatientDTO;
 import app.thivanka.healthcare.dto.PatientInformationDTO;
 import app.thivanka.healthcare.dto.TreatmentDTO;
+import app.thivanka.healthcare.dto.UpdateInvestigationDTO;
 import app.thivanka.healthcare.services.AddExamination;
 import app.thivanka.healthcare.services.AddInvestigation;
 import app.thivanka.healthcare.services.AddTreatment;
 import app.thivanka.healthcare.services.CreatePatient;
 import app.thivanka.healthcare.services.ShowPatientInfo;
+import app.thivanka.healthcare.services.UpdateInvestigation;
 
 @RestController
 @RequestMapping("/patient")
@@ -38,17 +41,22 @@ public class PatientController{
 	
 	@Autowired
 	private final AddInvestigation addInvestigation;
+	
+	@Autowired
+	private final UpdateInvestigation updateInvestigation;
 
 	public PatientController(CreatePatient createPatient,
 							ShowPatientInfo showPatientInfo,
 							AddExamination addExamination,
 							AddTreatment addTreatment,
-							AddInvestigation addInvestigation) {
+							AddInvestigation addInvestigation,
+							UpdateInvestigation updateInvestigation) {
 		this.createPatient = createPatient;
 		this.showPatientInfo = showPatientInfo;
 		this.addExamination = addExamination;
 		this.addTreatment = addTreatment;
 		this.addInvestigation = addInvestigation;
+		this.updateInvestigation = updateInvestigation;
 	}
 
 	@PostMapping("/create")
@@ -74,5 +82,10 @@ public class PatientController{
 	@PostMapping("/inv")
 	public ResponseEntity<InvestigationDTO> addInvestigation(@RequestBody InvestigationDTO investigationDto){
 		return ResponseEntity.ok(addInvestigation.addInvestigation(investigationDto));
+	}
+	
+	@PutMapping("/inv/update")
+	public ResponseEntity<UpdateInvestigationDTO> updateInvestigation(@RequestBody UpdateInvestigationDTO updateInvestigationDto){
+		return ResponseEntity.ok(updateInvestigation.updateInvestigation(updateInvestigationDto));
 	}
 }
