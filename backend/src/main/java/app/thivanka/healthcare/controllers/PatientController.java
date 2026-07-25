@@ -13,10 +13,12 @@ import app.thivanka.healthcare.dto.ExaminationDTO;
 import app.thivanka.healthcare.dto.PatientDTO;
 import app.thivanka.healthcare.dto.PatientInformationDTO;
 import app.thivanka.healthcare.dto.TreatmentDTO;
+import app.thivanka.healthcare.dto.UpdateExaminationDTO;
 import app.thivanka.healthcare.services.AddExamination;
 import app.thivanka.healthcare.services.AddTreatment;
 import app.thivanka.healthcare.services.CreatePatient;
 import app.thivanka.healthcare.services.ShowPatientInfo;
+import app.thivanka.healthcare.services.UpdateExamination;
 
 @RestController
 @RequestMapping("/patient")
@@ -33,15 +35,20 @@ public class PatientController{
 	
 	@Autowired
 	private final AddTreatment addTreatment;
+	
+	@Autowired
+	private final UpdateExamination updateExamination;
 
 	public PatientController(CreatePatient createPatient,
 							ShowPatientInfo showPatientInfo,
 							AddExamination addExamination,
-							AddTreatment addTreatment) {
+							AddTreatment addTreatment,
+							UpdateExamination updateExamination) {
 		this.createPatient = createPatient;
 		this.showPatientInfo = showPatientInfo;
 		this.addExamination = addExamination;
 		this.addTreatment = addTreatment;
+		this.updateExamination = updateExamination;
 	}
 
 	@PostMapping("/create")
@@ -62,5 +69,10 @@ public class PatientController{
 	@PostMapping("/treat")
 	public ResponseEntity<TreatmentDTO> addTreatment(@RequestBody TreatmentDTO treatmentDto){
 		return ResponseEntity.ok(addTreatment.addTreatment(treatmentDto));
+	}
+	
+	@PostMapping("/exam/update")
+	public ResponseEntity<UpdateExaminationDTO> updateExamination(@RequestBody UpdateExaminationDTO updateExaminationDto){
+		return ResponseEntity.ok(updateExamination.updateExamination(updateExaminationDto));
 	}
 }
