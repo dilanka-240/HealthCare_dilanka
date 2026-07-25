@@ -15,12 +15,14 @@ import app.thivanka.healthcare.dto.InvestigationDTO;
 import app.thivanka.healthcare.dto.PatientDTO;
 import app.thivanka.healthcare.dto.PatientInformationDTO;
 import app.thivanka.healthcare.dto.TreatmentDTO;
+import app.thivanka.healthcare.dto.UpdateExaminationDTO;
 import app.thivanka.healthcare.dto.UpdateInvestigationDTO;
 import app.thivanka.healthcare.services.AddExamination;
 import app.thivanka.healthcare.services.AddInvestigation;
 import app.thivanka.healthcare.services.AddTreatment;
 import app.thivanka.healthcare.services.CreatePatient;
 import app.thivanka.healthcare.services.ShowPatientInfo;
+import app.thivanka.healthcare.services.UpdateExamination;
 import app.thivanka.healthcare.services.UpdateInvestigation;
 
 @RestController
@@ -40,6 +42,7 @@ public class PatientController{
 	private final AddTreatment addTreatment;
 	
 	@Autowired
+	private final UpdateExamination updateExamination;
 	private final AddInvestigation addInvestigation;
 	
 	@Autowired
@@ -49,12 +52,14 @@ public class PatientController{
 							ShowPatientInfo showPatientInfo,
 							AddExamination addExamination,
 							AddTreatment addTreatment,
+							UpdateExamination updateExamination) {
 							AddInvestigation addInvestigation,
 							UpdateInvestigation updateInvestigation) {
 		this.createPatient = createPatient;
 		this.showPatientInfo = showPatientInfo;
 		this.addExamination = addExamination;
 		this.addTreatment = addTreatment;
+		this.updateExamination = updateExamination;
 		this.addInvestigation = addInvestigation;
 		this.updateInvestigation = updateInvestigation;
 	}
@@ -79,6 +84,9 @@ public class PatientController{
 		return ResponseEntity.ok(addTreatment.addTreatment(treatmentDto));
 	}
 	
+	@PostMapping("/exam/update")
+	public ResponseEntity<UpdateExaminationDTO> updateExamination(@RequestBody UpdateExaminationDTO updateExaminationDto){
+		return ResponseEntity.ok(updateExamination.updateExamination(updateExaminationDto));
 	@PostMapping("/inv")
 	public ResponseEntity<InvestigationDTO> addInvestigation(@RequestBody InvestigationDTO investigationDto){
 		return ResponseEntity.ok(addInvestigation.addInvestigation(investigationDto));

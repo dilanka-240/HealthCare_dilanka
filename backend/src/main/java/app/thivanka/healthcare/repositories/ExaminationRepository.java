@@ -9,4 +9,5 @@ import app.thivanka.healthcare.models.Patient;
 
 public interface ExaminationRepository extends JpaRepository<Examination, Long>{
 	Optional<Examination> findByPatient(Patient patient);
+	Optional<Examination> findByExam_id(Long exam_id);
 }
