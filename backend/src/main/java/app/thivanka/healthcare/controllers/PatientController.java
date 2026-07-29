@@ -17,6 +17,7 @@ import app.thivanka.healthcare.dto.PatientInformationDTO;
 import app.thivanka.healthcare.dto.TreatmentDTO;
 import app.thivanka.healthcare.dto.UpdateExaminationDTO;
 import app.thivanka.healthcare.dto.UpdateInvestigationDTO;
+import app.thivanka.healthcare.dto.UpdateTreatmentDTO;
 import app.thivanka.healthcare.services.AddExamination;
 import app.thivanka.healthcare.services.AddInvestigation;
 import app.thivanka.healthcare.services.AddTreatment;
@@ -24,6 +25,7 @@ import app.thivanka.healthcare.services.CreatePatient;
 import app.thivanka.healthcare.services.ShowPatientInfo;
 import app.thivanka.healthcare.services.UpdateExamination;
 import app.thivanka.healthcare.services.UpdateInvestigation;
+import app.thivanka.healthcare.services.UpdateTreatment;
 
 @RestController
 @RequestMapping("/patient")
@@ -49,6 +51,10 @@ public class PatientController{
 	
 	@Autowired
 	private final UpdateInvestigation updateInvestigation;
+	
+	@Autowired
+	private final UpdateTreatment updateTreatment;
+	
 
 	public PatientController(CreatePatient createPatient,
 							ShowPatientInfo showPatientInfo,
@@ -56,7 +62,8 @@ public class PatientController{
 							AddTreatment addTreatment,
 							UpdateExamination updateExamination, 
 							AddInvestigation addInvestigation,
-							UpdateInvestigation updateInvestigation) {
+							UpdateInvestigation updateInvestigation,
+							UpdateTreatment updateTreatment) {
 		this.createPatient = createPatient;
 		this.showPatientInfo = showPatientInfo;
 		this.addExamination = addExamination;
@@ -64,6 +71,7 @@ public class PatientController{
 		this.updateExamination = updateExamination;
 		this.addInvestigation = addInvestigation;
 		this.updateInvestigation = updateInvestigation;
+		this.updateTreatment = updateTreatment;
 	}
 
 	@PostMapping("/create")
@@ -99,5 +107,10 @@ public class PatientController{
 	@PutMapping("/inv/update")
 	public ResponseEntity<UpdateInvestigationDTO> updateInvestigation(@RequestBody UpdateInvestigationDTO updateInvestigationDto){
 		return ResponseEntity.ok(updateInvestigation.updateInvestigation(updateInvestigationDto));
+	}
+	
+	@PostMapping("/treat/update")
+	public ResponseEntity<UpdateTreatmentDTO> updateTreatment(@RequestBody UpdateTreatmentDTO updateTreatmentDto){
+		return ResponseEntity.ok(updateTreatment.updateTreatment(updateTreatmentDto));
 	}
 }
