@@ -2,6 +2,7 @@ package app.thivanka.healthcare.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import app.thivanka.healthcare.dto.UpdateExaminationDTO;
 import app.thivanka.healthcare.mappers.UpdateExaminationMapper;
@@ -19,12 +20,13 @@ public class UpdateExaminationImpl implements UpdateExamination{
 	@Autowired
 	ExaminationRepository examinationRepository;
 	
+	@Transactional
 	public UpdateExaminationDTO updateExamination(UpdateExaminationDTO updateExaminationDto) {
 		
 		Patient patinet = patientRepository.findByNo(updateExaminationDto.getNo())
 				.orElseThrow(() -> new IllegalArgumentException("patient not exists"));
 		
-		Examination examination = examinationRepository.findByExam_id(updateExaminationDto.getExam_id())
+		Examination examination = examinationRepository.findByExamId(updateExaminationDto.getExam_id())
 				.orElseThrow(() -> new IllegalArgumentException("Examination not exists"));
 		
 		UpdateExaminationMapper.toEntity(updateExaminationDto, examination);

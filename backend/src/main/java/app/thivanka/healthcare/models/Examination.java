@@ -16,7 +16,8 @@ import jakarta.persistence.Table;
 public class Examination{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long exam_id;
+	@Column(name = "exam_id")
+	private Long examId;
 
 	@ManyToOne
 	@JoinColumn(name = "no")
@@ -41,8 +42,8 @@ public class Examination{
 	
 	//setters
 	
-	public void setExam_id(Long exam_id) {
-		this.exam_id = exam_id;
+	public void setExamId(Long examId) {
+		this.examId = examId;
 	}
 	
 	public void setPatient(Patient patient) {
@@ -71,8 +72,8 @@ public class Examination{
 	
 	//getters
 	
-	public Long getExam_id() {
-		return exam_id;
+	public Long getExamId() {
+		return examId;
 	}
 	
 	public Patient getPatient() {

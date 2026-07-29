@@ -17,7 +17,7 @@ public class UpdateExaminationMapper{
 	public static UpdateExaminationDTO toDto(Examination examination) {
 		UpdateExaminationDTO updateExaminationDto = new UpdateExaminationDTO();
 		
-		updateExaminationDto.setExam_id(examination.getExam_id());
+		updateExaminationDto.setExam_id(examination.getExamId());
 		updateExaminationDto.setNo(examination.getPatient().getNo());
 		updateExaminationDto.setBp(examination.getBp());
 		updateExaminationDto.setHp(examination.getHp());

@@ -2,6 +2,7 @@ package app.thivanka.healthcare.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import app.thivanka.healthcare.dto.InvestigationDTO;
 import app.thivanka.healthcare.dto.UpdateInvestigationDTO;
@@ -21,6 +22,7 @@ public class UpdateInvestigationImpl implements UpdateInvestigation{
 	@Autowired
 	PatientRepository patientRepository;
 	
+	@Transactional
 	public UpdateInvestigationDTO updateInvestigation(UpdateInvestigationDTO updateInvestigationDto) {
 
 		Patient patient = patientRepository.findByNo(updateInvestigationDto.getNo())

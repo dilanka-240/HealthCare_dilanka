@@ -43,6 +43,8 @@ public class PatientController{
 	
 	@Autowired
 	private final UpdateExamination updateExamination;
+	
+	@Autowired
 	private final AddInvestigation addInvestigation;
 	
 	@Autowired
@@ -52,7 +54,7 @@ public class PatientController{
 							ShowPatientInfo showPatientInfo,
 							AddExamination addExamination,
 							AddTreatment addTreatment,
-							UpdateExamination updateExamination) {
+							UpdateExamination updateExamination, 
 							AddInvestigation addInvestigation,
 							UpdateInvestigation updateInvestigation) {
 		this.createPatient = createPatient;
@@ -87,6 +89,8 @@ public class PatientController{
 	@PostMapping("/exam/update")
 	public ResponseEntity<UpdateExaminationDTO> updateExamination(@RequestBody UpdateExaminationDTO updateExaminationDto){
 		return ResponseEntity.ok(updateExamination.updateExamination(updateExaminationDto));
+	}
+		
 	@PostMapping("/inv")
 	public ResponseEntity<InvestigationDTO> addInvestigation(@RequestBody InvestigationDTO investigationDto){
 		return ResponseEntity.ok(addInvestigation.addInvestigation(investigationDto));
