@@ -1,31 +1,23 @@
 package app.thivanka.healthcare.dto;
 
-import java.time.LocalDate;
 
-import app.thivanka.healthcare.models.Patient;
-
-public class ExaminationDTO{
+public class UpdateExaminationDTO {
 	
-	private Long examId;
+	private Long exam_id;
 	private Long no;
-	private LocalDate exam_date;
-	private int bp;//blood pressure
-	private int hp; //heart pressure
+	private int bp;
+	private int hp;
 	private float wi;
 	private float temp;
+	
 	//setters
 	
-	public void setExamId(Long examId) {
-		this.examId = examId;
+	public void setExam_id(Long exam_id) {
+		this.exam_id = exam_id;
 	}
 	
 	public void setNo(Long no) {
 		this.no = no;
-	}
-	
-	
-	public void setExam_date(LocalDate exam_date) {
-		this.exam_date = exam_date;
 	}
 	
 	public void setBp(int bp) {
@@ -44,18 +36,15 @@ public class ExaminationDTO{
 		this.temp = temp;
 	}
 	
+	
 	//getters
 	
-	public Long getExamId() {
-		return examId;
+	public Long getExam_id() {
+		return exam_id;
 	}
 	
 	public Long getNo() {
 		return no;
-	}
-	
-	public LocalDate getExam_date() {
-		return exam_date;
 	}
 	
 	public int getBp() {

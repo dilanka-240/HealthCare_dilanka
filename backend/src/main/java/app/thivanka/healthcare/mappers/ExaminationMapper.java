@@ -7,6 +7,7 @@ public class ExaminationMapper{
 	
 	public static Examination toEntity(ExaminationDTO examinationDto) {
 		Examination examination = new Examination();
+		examination.setExamId(examination.getExamId());
 		examination.setExam_date(examinationDto.getExam_date());
 		examination.setBp(examinationDto.getBp());
 		examination.setHp(examinationDto.getHp());
@@ -17,6 +18,8 @@ public class ExaminationMapper{
 	
 	public static ExaminationDTO toDto(Examination examination) {
 		ExaminationDTO examinationDto = new ExaminationDTO();
+		examinationDto.setExamId(examination.getExamId());
+		examinationDto.setNo(examination.getPatient().getNo());
 		examinationDto.setExam_date(examination.getExam_date());
 		examinationDto.setBp(examination.getBp());
 		examinationDto.setHp(examination.getHp());

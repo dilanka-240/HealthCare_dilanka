@@ -23,9 +23,11 @@ public class AddTreatmentImpl implements AddTreatment{
 	@Override
 	@Transactional
 	public TreatmentDTO addTreatment(TreatmentDTO treatmentDto) {
+		
 		Long no = treatmentDto.getNo();
 		Patient patient = patientRepository.findByNo(no)
-				.orElseThrow(() -> new IllegalArgumentException("Patient doesn't exits"));;
+				.orElseThrow(() -> new IllegalArgumentException("Patient does not exits"));
+
 		Treatment treatment = TreatmentMapper.toEntity(treatmentDto);
 		treatment.setPatient(patient);
 		treatmentRepository.save(treatment);

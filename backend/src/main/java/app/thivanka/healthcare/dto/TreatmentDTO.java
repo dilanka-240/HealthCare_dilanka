@@ -2,11 +2,10 @@ package app.thivanka.healthcare.dto;
 
 import java.time.LocalDate;
 
-import app.thivanka.healthcare.models.Patient;
 
 public class TreatmentDTO{
 	private Long treat_id;
-	Long no;
+	private Long no;
 	private LocalDate treat_date;
 	private String treat_details;
 	

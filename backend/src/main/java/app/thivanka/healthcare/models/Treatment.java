@@ -17,7 +17,8 @@ public class Treatment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long treat_id;
+	@Column(name = "treat_id")
+	private Long treatId;
 
 	@ManyToOne
 	@JoinColumn(name = "no")
@@ -31,8 +32,8 @@ public class Treatment {
 	
 	//setters
 	
-	public void setTreat_id(Long treat_id) {
-		this.treat_id = treat_id;
+	public void setTreatId(Long treatId) {
+		this.treatId = treatId;
 	}
 	
 	public void setPatient(Patient patient) {
@@ -49,8 +50,8 @@ public class Treatment {
 	
 	//getters
 	
-	public Long getTreat_id() {
-		return treat_id;
+	public Long getTreatId() {
+		return treatId;
 	}
 	
 	public Patient getPatient() {
