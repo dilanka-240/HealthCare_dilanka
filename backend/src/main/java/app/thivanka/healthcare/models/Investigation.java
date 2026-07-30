@@ -17,7 +17,8 @@ public class Investigation{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long inv_id;
+	@Column(name = "inv_id")
+	private Long invId;
 	
 	@ManyToOne
 	@JoinColumn(name = "no")
@@ -34,8 +35,8 @@ public class Investigation{
 	
 	//setters
 	
-	public void setInv_id(Long inv_id) {
-		this.inv_id = inv_id;
+	public void setInvId(Long invId) {
+		this.invId = invId;
 	}
 	
 	public void setPatient(Patient patient) {
@@ -56,8 +57,8 @@ public class Investigation{
 	
 	//getters
 	
-	public Long getInv_id() {
-		return inv_id;
+	public Long getInvId() {
+		return invId;
 	}
 	
 	public Patient getPatient() {

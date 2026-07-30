@@ -12,7 +12,7 @@ public class UpdateInvestigationMapper {
 	
 	public static UpdateInvestigationDTO toDto(Investigation investigation) {
 		UpdateInvestigationDTO updateInvestigationDto = new UpdateInvestigationDTO();
-		updateInvestigationDto.setInv_id(investigation.getInv_id());
+		updateInvestigationDto.setInvId(investigation.getInvId());
 		updateInvestigationDto.setNo(investigation.getPatient().getNo());
 		updateInvestigationDto.setInv_details(investigation.getInv_details());
 		return updateInvestigationDto;

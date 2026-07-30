@@ -1,6 +1,7 @@
 package app.thivanka.healthcare.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import app.thivanka.healthcare.dto.UpdateTreatmentDTO;
 import app.thivanka.healthcare.mappers.UpdateTreatmentMapper;
@@ -9,6 +10,7 @@ import app.thivanka.healthcare.models.Treatment;
 import app.thivanka.healthcare.repositories.PatientRepository;
 import app.thivanka.healthcare.repositories.TreatmentRepository;
 
+@Service
 public class UpdateTreatmentImpl implements UpdateTreatment{
 	
 	@Autowired
