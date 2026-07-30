@@ -28,8 +28,8 @@ public class UpdateInvestigationImpl implements UpdateInvestigation{
 		Patient patient = patientRepository.findByNo(updateInvestigationDto.getNo())
 				.orElseThrow(() -> new IllegalArgumentException("Patient not exits"));
 
-		Investigation investigation = investigationRepository.findByPatient(patient)
-				.orElseThrow(() -> new IllegalArgumentException("Investigation not exits"));
+		Investigation investigation = investigationRepository.findById(updateInvestigationDto.getInvId())
+				.orElseThrow(() -> new IllegalArgumentException("investigation not exists"));
 		
 		UpdateInvestigationMapper.toEntity(updateInvestigationDto, investigation);
 		investigationRepository.save(investigation);

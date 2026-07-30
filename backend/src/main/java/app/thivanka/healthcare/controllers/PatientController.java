@@ -94,7 +94,7 @@ public class PatientController{
 		return ResponseEntity.ok(addTreatment.addTreatment(treatmentDto));
 	}
 	
-	@PostMapping("/exam/update")
+	@PutMapping("/exam/update")
 	public ResponseEntity<UpdateExaminationDTO> updateExamination(@RequestBody UpdateExaminationDTO updateExaminationDto){
 		return ResponseEntity.ok(updateExamination.updateExamination(updateExaminationDto));
 	}
@@ -109,7 +109,7 @@ public class PatientController{
 		return ResponseEntity.ok(updateInvestigation.updateInvestigation(updateInvestigationDto));
 	}
 	
-	@PostMapping("/treat/update")
+	@PutMapping("/treat/update")
 	public ResponseEntity<UpdateTreatmentDTO> updateTreatment(@RequestBody UpdateTreatmentDTO updateTreatmentDto){
 		return ResponseEntity.ok(updateTreatment.updateTreatment(updateTreatmentDto));
 	}

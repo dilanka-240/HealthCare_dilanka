@@ -13,7 +13,7 @@ public class UpdateInvestigationDTO {
 		this.no = no;
 	}
 	
-	public void setInv_id(Long inv_id) {
+	public void setInvId(Long inv_id) {
 		this.inv_id = inv_id;
 	}
 	
@@ -21,11 +21,13 @@ public class UpdateInvestigationDTO {
 		this.inv_details = inv_details;
 	}
 	
+	//getters
+	
 	public Long getNo() {
 		return no;
 	}
 	
-	public Long getInv_id() {
+	public Long getInvId() {
 		return inv_id;
 	}
 	

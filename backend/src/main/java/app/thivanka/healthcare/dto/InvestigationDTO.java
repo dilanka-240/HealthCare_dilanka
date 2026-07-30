@@ -3,7 +3,7 @@ package app.thivanka.healthcare.dto;
 import java.time.LocalDate;
 
 public class InvestigationDTO{
-	private Long inv_id;
+	private Long invId;
 	
 	private Long no;
 	private String inv_details;
@@ -12,8 +12,8 @@ public class InvestigationDTO{
 	
 	//setters
 	
-	public void setInv_id(Long inv_id) {
-		this.inv_id = inv_id;
+	public void setInvId(Long invId) {
+		this.invId = invId;
 	}
 	
 	public void setNo(Long no) {
@@ -34,8 +34,8 @@ public class InvestigationDTO{
 	
 	//getters
 	
-	public Long getInv_id() {
-		return inv_id;
+	public Long getInvId() {
+		return invId;
 	}
 	
 	public Long getNo() {
