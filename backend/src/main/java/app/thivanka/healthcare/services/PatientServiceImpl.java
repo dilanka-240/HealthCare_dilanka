@@ -11,15 +11,17 @@ import app.thivanka.healthcare.repositories.PatientRepository;
 
 
 @Service
-public class CreatePatientImpl implements CreatePatient{
+public class PatientServiceImpl implements PatientService{
 	
 	private final PatientRepository patientRepository;
 	
-	public CreatePatientImpl(PatientRepository patientRepository) {
+	public PatientServiceImpl(PatientRepository patientRepository) {
 		this.patientRepository = patientRepository;
 	}
 	
 	
+	// create patient 
+
 	@Transactional
 	public PatientDTO createPatient(PatientDTO patientDto) {
 		Patient patient = PatientMapper.toCreateEntity(patientDto);
@@ -27,4 +29,18 @@ public class CreatePatientImpl implements CreatePatient{
 		return PatientMapper.toCreateInfoDto(patient);
 
 	}
+	
+	// hard delete patient 
+	
+	public void deletePatient(Long no) {
+		
+		if(!patientRepository.existsById(no)) {
+			throw new IllegalArgumentException("Patient not exists");
+		}
+		
+		patientRepository.deleteById(no);
+	}
+	
+	
+	
 }
