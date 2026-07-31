@@ -2,6 +2,7 @@ package app.thivanka.healthcare.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ import app.thivanka.healthcare.dto.UpdateTreatmentDTO;
 import app.thivanka.healthcare.services.AddExamination;
 import app.thivanka.healthcare.services.AddInvestigation;
 import app.thivanka.healthcare.services.AddTreatment;
-import app.thivanka.healthcare.services.CreatePatient;
+import app.thivanka.healthcare.services.PatientService;
 import app.thivanka.healthcare.services.ShowPatientInfo;
 import app.thivanka.healthcare.services.UpdateExamination;
 import app.thivanka.healthcare.services.UpdateInvestigation;
@@ -32,7 +33,7 @@ import app.thivanka.healthcare.services.UpdateTreatment;
 public class PatientController{
 	
 	@Autowired
-	private final CreatePatient createPatient;
+	private final PatientService patientService;
 	
 	@Autowired
 	private final ShowPatientInfo showPatientInfo;
@@ -56,7 +57,7 @@ public class PatientController{
 	private final UpdateTreatment updateTreatment;
 	
 
-	public PatientController(CreatePatient createPatient,
+	public PatientController(PatientService patientService,
 							ShowPatientInfo showPatientInfo,
 							AddExamination addExamination,
 							AddTreatment addTreatment,
@@ -64,7 +65,7 @@ public class PatientController{
 							AddInvestigation addInvestigation,
 							UpdateInvestigation updateInvestigation,
 							UpdateTreatment updateTreatment) {
-		this.createPatient = createPatient;
+		this.patientService = patientService;
 		this.showPatientInfo = showPatientInfo;
 		this.addExamination = addExamination;
 		this.addTreatment = addTreatment;
@@ -76,7 +77,7 @@ public class PatientController{
 
 	@PostMapping("/create")
 	public ResponseEntity<PatientDTO> createPatient(@RequestBody PatientDTO patientDto){
-		return ResponseEntity.ok(createPatient.createPatient(patientDto));
+		return ResponseEntity.ok(patientService.createPatient(patientDto));
 	}
 	
 	@GetMapping("/info/{no}")
@@ -112,5 +113,11 @@ public class PatientController{
 	@PutMapping("/treat/update")
 	public ResponseEntity<UpdateTreatmentDTO> updateTreatment(@RequestBody UpdateTreatmentDTO updateTreatmentDto){
 		return ResponseEntity.ok(updateTreatment.updateTreatment(updateTreatmentDto));
+	}
+	
+	@DeleteMapping("/{no}/delete")
+	public ResponseEntity<Long> deletePatient(@PathVariable Long no){
+		patientService.deletePatient(no);
+		return ResponseEntity.ok(no);
 	}
 }
