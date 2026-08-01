@@ -19,12 +19,11 @@ import app.thivanka.healthcare.dto.TreatmentDTO;
 import app.thivanka.healthcare.dto.UpdateExaminationDTO;
 import app.thivanka.healthcare.dto.UpdateInvestigationDTO;
 import app.thivanka.healthcare.dto.UpdateTreatmentDTO;
-import app.thivanka.healthcare.services.AddExamination;
 import app.thivanka.healthcare.services.AddInvestigation;
 import app.thivanka.healthcare.services.AddTreatment;
+import app.thivanka.healthcare.services.ExaminationService;
 import app.thivanka.healthcare.services.PatientService;
 import app.thivanka.healthcare.services.ShowPatientInfo;
-import app.thivanka.healthcare.services.UpdateExamination;
 import app.thivanka.healthcare.services.UpdateInvestigation;
 import app.thivanka.healthcare.services.UpdateTreatment;
 
@@ -39,13 +38,12 @@ public class PatientController{
 	private final ShowPatientInfo showPatientInfo;
 	
 	@Autowired
-	private final AddExamination addExamination;
+	private final ExaminationService examinationService;
+	
 	
 	@Autowired
 	private final AddTreatment addTreatment;
 	
-	@Autowired
-	private final UpdateExamination updateExamination;
 	
 	@Autowired
 	private final AddInvestigation addInvestigation;
@@ -59,45 +57,54 @@ public class PatientController{
 
 	public PatientController(PatientService patientService,
 							ShowPatientInfo showPatientInfo,
-							AddExamination addExamination,
+							ExaminationService examinationService,
 							AddTreatment addTreatment,
-							UpdateExamination updateExamination, 
 							AddInvestigation addInvestigation,
 							UpdateInvestigation updateInvestigation,
 							UpdateTreatment updateTreatment) {
 		this.patientService = patientService;
 		this.showPatientInfo = showPatientInfo;
-		this.addExamination = addExamination;
+		this.examinationService = examinationService;
 		this.addTreatment = addTreatment;
-		this.updateExamination = updateExamination;
 		this.addInvestigation = addInvestigation;
 		this.updateInvestigation = updateInvestigation;
 		this.updateTreatment = updateTreatment;
 	}
 
+	// create patient
 	@PostMapping("/create")
 	public ResponseEntity<PatientDTO> createPatient(@RequestBody PatientDTO patientDto){
 		return ResponseEntity.ok(patientService.createPatient(patientDto));
 	}
 	
+	// Get info about patient
 	@GetMapping("/info/{no}")
 	public ResponseEntity<PatientInformationDTO> showPatientInfo(@PathVariable Long no) {
 		return ResponseEntity.ok(showPatientInfo.showInformation(no));
 	}
 	
+	// Create new examination
 	@PostMapping("/exam")
 	public ResponseEntity<ExaminationDTO> addExamination(@RequestBody ExaminationDTO examinationDto){
-		return ResponseEntity.ok(addExamination.addExamination(examinationDto));
+		return ResponseEntity.ok(examinationService.addExamination(examinationDto));
+	}
+
+	// Update existing examination
+	@PutMapping("/exam/update")
+	public ResponseEntity<UpdateExaminationDTO> updateExamination(@RequestBody UpdateExaminationDTO updateExaminationDto){
+		return ResponseEntity.ok(examinationService.updateExamination(updateExaminationDto));
+	}
+	
+	// Delete Examination
+	@DeleteMapping("{no}/exam/{examId}/delete")
+	public ResponseEntity<Long> deleteExamination(@PathVariable Long examId){
+		examinationService.deleteExamination(examId);
+		return ResponseEntity.ok(examId);
 	}
 	
 	@PostMapping("/treat")
 	public ResponseEntity<TreatmentDTO> addTreatment(@RequestBody TreatmentDTO treatmentDto){
 		return ResponseEntity.ok(addTreatment.addTreatment(treatmentDto));
-	}
-	
-	@PutMapping("/exam/update")
-	public ResponseEntity<UpdateExaminationDTO> updateExamination(@RequestBody UpdateExaminationDTO updateExaminationDto){
-		return ResponseEntity.ok(updateExamination.updateExamination(updateExaminationDto));
 	}
 		
 	@PostMapping("/inv")

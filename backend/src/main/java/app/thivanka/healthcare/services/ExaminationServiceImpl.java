@@ -5,14 +5,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import app.thivanka.healthcare.dto.ExaminationDTO;
+import app.thivanka.healthcare.dto.UpdateExaminationDTO;
 import app.thivanka.healthcare.mappers.ExaminationMapper;
+import app.thivanka.healthcare.mappers.UpdateExaminationMapper;
 import app.thivanka.healthcare.models.Examination;
 import app.thivanka.healthcare.models.Patient;
 import app.thivanka.healthcare.repositories.ExaminationRepository;
 import app.thivanka.healthcare.repositories.PatientRepository;
 
 @Service
-public class AddExaminationImpl implements AddExamination{
+public class ExaminationServiceImpl implements ExaminationService{
 	
 	
 	@Autowired
@@ -21,7 +23,7 @@ public class AddExaminationImpl implements AddExamination{
 	@Autowired
 	PatientRepository patientRepository;
 	
-	
+	// Add examination 
 	@Override
 	@Transactional
 	public ExaminationDTO addExamination(ExaminationDTO examinationDto) {
@@ -36,5 +38,30 @@ public class AddExaminationImpl implements AddExamination{
 
 		
 		return ExaminationMapper.toDto(examination);
+	}
+	
+	// Update examination
+	@Transactional
+	public UpdateExaminationDTO updateExamination(UpdateExaminationDTO updateExaminationDto) {
+		
+		Patient patinet = patientRepository.findByNo(updateExaminationDto.getNo())
+				.orElseThrow(() -> new IllegalArgumentException("patient not exists"));
+		
+		Examination examination = examinationRepository.findByExamId(updateExaminationDto.getExam_id())
+				.orElseThrow(() -> new IllegalArgumentException("Examination not exists"));
+		
+		UpdateExaminationMapper.toEntity(updateExaminationDto, examination);
+		examinationRepository.save(examination);
+		return UpdateExaminationMapper.toDto(examination);
+	}
+	
+	// Delete examination
+	public void deleteExamination(Long examId) {
+		
+		if(!examinationRepository.existsById(examId)) {
+			throw new IllegalArgumentException("Examination not exists");
+		}
+		
+		examinationRepository.deleteById(examId);
 	}
 }
