@@ -20,12 +20,11 @@ import app.thivanka.healthcare.dto.UpdateExaminationDTO;
 import app.thivanka.healthcare.dto.UpdateInvestigationDTO;
 import app.thivanka.healthcare.dto.UpdateTreatmentDTO;
 import app.thivanka.healthcare.services.AddInvestigation;
-import app.thivanka.healthcare.services.AddTreatment;
 import app.thivanka.healthcare.services.ExaminationService;
 import app.thivanka.healthcare.services.PatientService;
 import app.thivanka.healthcare.services.ShowPatientInfo;
+import app.thivanka.healthcare.services.TreatmentService;
 import app.thivanka.healthcare.services.UpdateInvestigation;
-import app.thivanka.healthcare.services.UpdateTreatment;
 
 @RestController
 @RequestMapping("/patient")
@@ -40,35 +39,30 @@ public class PatientController{
 	@Autowired
 	private final ExaminationService examinationService;
 	
-	
 	@Autowired
-	private final AddTreatment addTreatment;
-	
+	private final TreatmentService treatmentService;
 	
 	@Autowired
 	private final AddInvestigation addInvestigation;
 	
 	@Autowired
 	private final UpdateInvestigation updateInvestigation;
+
 	
-	@Autowired
-	private final UpdateTreatment updateTreatment;
 	
 
 	public PatientController(PatientService patientService,
 							ShowPatientInfo showPatientInfo,
 							ExaminationService examinationService,
-							AddTreatment addTreatment,
+							TreatmentService treatmentService,
 							AddInvestigation addInvestigation,
-							UpdateInvestigation updateInvestigation,
-							UpdateTreatment updateTreatment) {
+							UpdateInvestigation updateInvestigation) {
 		this.patientService = patientService;
 		this.showPatientInfo = showPatientInfo;
 		this.examinationService = examinationService;
-		this.addTreatment = addTreatment;
+		this.treatmentService = treatmentService;
 		this.addInvestigation = addInvestigation;
 		this.updateInvestigation = updateInvestigation;
-		this.updateTreatment = updateTreatment;
 	}
 
 	// create patient
@@ -84,27 +78,55 @@ public class PatientController{
 	}
 	
 	// Create new examination
-	@PostMapping("/exam")
-	public ResponseEntity<ExaminationDTO> addExamination(@RequestBody ExaminationDTO examinationDto){
+	@PostMapping("/{no}/exam")
+	public ResponseEntity<ExaminationDTO> addExamination(
+			@PathVariable Long no,
+			@RequestBody ExaminationDTO examinationDto){
 		return ResponseEntity.ok(examinationService.addExamination(examinationDto));
 	}
 
 	// Update existing examination
-	@PutMapping("/exam/update")
-	public ResponseEntity<UpdateExaminationDTO> updateExamination(@RequestBody UpdateExaminationDTO updateExaminationDto){
+	@PutMapping("/{no}/exam/{examId}/update")
+	public ResponseEntity<UpdateExaminationDTO> updateExamination(
+			@PathVariable Long examId,
+			@PathVariable Long no,
+			@RequestBody UpdateExaminationDTO updateExaminationDto){
 		return ResponseEntity.ok(examinationService.updateExamination(updateExaminationDto));
 	}
 	
 	// Delete Examination
 	@DeleteMapping("{no}/exam/{examId}/delete")
-	public ResponseEntity<Long> deleteExamination(@PathVariable Long examId){
+	public ResponseEntity<Long> deleteExamination(
+			@PathVariable Long examId,
+			@PathVariable Long no){
 		examinationService.deleteExamination(examId);
 		return ResponseEntity.ok(examId);
 	}
 	
-	@PostMapping("/treat")
-	public ResponseEntity<TreatmentDTO> addTreatment(@RequestBody TreatmentDTO treatmentDto){
-		return ResponseEntity.ok(addTreatment.addTreatment(treatmentDto));
+	// Add Treatment
+	@PostMapping("/{no}/treat")
+	public ResponseEntity<TreatmentDTO> addTreatment(
+			@PathVariable Long no,
+			@RequestBody TreatmentDTO treatmentDto){
+		return ResponseEntity.ok(treatmentService.addTreatment(treatmentDto));
+	}
+	
+	// Update existing Treatment
+	@PutMapping("/{no}/treat/{treatId}/update")
+	public ResponseEntity<UpdateTreatmentDTO> updateTreatment(
+			@PathVariable Long no,
+			@PathVariable Long treatId,
+			@RequestBody UpdateTreatmentDTO updateTreatmentDto){
+		return ResponseEntity.ok(treatmentService.updateTreatment(updateTreatmentDto));
+	}
+	
+	// Delete treatment
+	@DeleteMapping("/{no}/treat/{treatId}/delete")
+	public ResponseEntity<Long> deleteTreatment(
+			@PathVariable Long treatId,
+			@PathVariable Long no){
+		treatmentService.deleteTreatment(treatId);
+		return ResponseEntity.ok(treatId);
 	}
 		
 	@PostMapping("/inv")
@@ -117,10 +139,6 @@ public class PatientController{
 		return ResponseEntity.ok(updateInvestigation.updateInvestigation(updateInvestigationDto));
 	}
 	
-	@PutMapping("/treat/update")
-	public ResponseEntity<UpdateTreatmentDTO> updateTreatment(@RequestBody UpdateTreatmentDTO updateTreatmentDto){
-		return ResponseEntity.ok(updateTreatment.updateTreatment(updateTreatmentDto));
-	}
 	
 	@DeleteMapping("/{no}/delete")
 	public ResponseEntity<Long> deletePatient(@PathVariable Long no){
