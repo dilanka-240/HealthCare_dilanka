@@ -56,6 +56,8 @@ public class ExaminationServiceImpl implements ExaminationService{
 	}
 	
 	// Delete examination
+	@Override
+	@Transactional
 	public void deleteExamination(Long examId) {
 		
 		if(!examinationRepository.existsById(examId)) {
