@@ -19,12 +19,11 @@ import app.thivanka.healthcare.dto.TreatmentDTO;
 import app.thivanka.healthcare.dto.UpdateExaminationDTO;
 import app.thivanka.healthcare.dto.UpdateInvestigationDTO;
 import app.thivanka.healthcare.dto.UpdateTreatmentDTO;
-import app.thivanka.healthcare.services.AddInvestigation;
 import app.thivanka.healthcare.services.ExaminationService;
+import app.thivanka.healthcare.services.InvestigationService;
 import app.thivanka.healthcare.services.PatientService;
 import app.thivanka.healthcare.services.ShowPatientInfo;
 import app.thivanka.healthcare.services.TreatmentService;
-import app.thivanka.healthcare.services.UpdateInvestigation;
 
 @RestController
 @RequestMapping("/patient")
@@ -42,12 +41,9 @@ public class PatientController{
 	@Autowired
 	private final TreatmentService treatmentService;
 	
-	@Autowired
-	private final AddInvestigation addInvestigation;
-	
-	@Autowired
-	private final UpdateInvestigation updateInvestigation;
 
+	@Autowired
+	private final InvestigationService investigationService;
 	
 	
 
@@ -55,14 +51,12 @@ public class PatientController{
 							ShowPatientInfo showPatientInfo,
 							ExaminationService examinationService,
 							TreatmentService treatmentService,
-							AddInvestigation addInvestigation,
-							UpdateInvestigation updateInvestigation) {
+							InvestigationService investigationService) {
 		this.patientService = patientService;
 		this.showPatientInfo = showPatientInfo;
 		this.examinationService = examinationService;
 		this.treatmentService = treatmentService;
-		this.addInvestigation = addInvestigation;
-		this.updateInvestigation = updateInvestigation;
+		this.investigationService = investigationService;
 	}
 
 	// create patient
@@ -129,14 +123,31 @@ public class PatientController{
 		return ResponseEntity.ok(treatId);
 	}
 		
-	@PostMapping("/inv")
-	public ResponseEntity<InvestigationDTO> addInvestigation(@RequestBody InvestigationDTO investigationDto){
-		return ResponseEntity.ok(addInvestigation.addInvestigation(investigationDto));
+	
+	// Create investigation
+	@PostMapping("/{no}/inv")
+	public ResponseEntity<InvestigationDTO> addInvestigation(
+			@PathVariable Long no,
+			@RequestBody InvestigationDTO investigationDto){
+		return ResponseEntity.ok(investigationService.addInvestigation(investigationDto));
 	}
 	
-	@PutMapping("/inv/update")
-	public ResponseEntity<UpdateInvestigationDTO> updateInvestigation(@RequestBody UpdateInvestigationDTO updateInvestigationDto){
-		return ResponseEntity.ok(updateInvestigation.updateInvestigation(updateInvestigationDto));
+	// Update investigation
+	@PutMapping("/{no}/inv/{invId}/update")
+	public ResponseEntity<UpdateInvestigationDTO> updateInvestigation(
+			@PathVariable Long no,
+			@PathVariable Long invId,
+			@RequestBody UpdateInvestigationDTO updateInvestigationDto){
+		return ResponseEntity.ok(investigationService.updateInvestigation(updateInvestigationDto));
+	}
+	
+	// Delete investigation
+	@DeleteMapping("/{no}/inv/{invId}/delete")
+	public ResponseEntity<Long> deleteInvestigation(
+			@PathVariable Long invId,
+			@PathVariable Long no){
+		investigationService.deleteInvestigation(invId);
+		return ResponseEntity.ok(invId);
 	}
 	
 	
