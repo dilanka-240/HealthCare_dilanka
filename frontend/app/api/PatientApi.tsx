@@ -1,4 +1,4 @@
-const API_URL = "http://10.0.2.2:8080/patients";
+const API_URL = "http://10.0.2.2:8080/patient";
 
 export const createPatient = async (patient: any) => {
   const res = await fetch(API_URL, {
