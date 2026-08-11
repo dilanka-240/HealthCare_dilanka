@@ -54,7 +54,7 @@ export default function AddExamination() {
       />
 
       <TextInput
-        placeholder="Heart Pulse"
+        placeholder="Heart Pressure"
         value={exam.hp}
         onChangeText={(t) => handleChange("hp", t)}
         style={styles.input}
