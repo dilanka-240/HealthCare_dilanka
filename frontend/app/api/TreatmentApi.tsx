@@ -1,8 +1,6 @@
-import { addExamination } from './ExaminationApi.tsx';
-
 const API_URL = "http://10.0.2.2:8080/patient/treat"
 
-export const addTreatment = async (treat: any) => {
+export const addTreatmentApi = async (treat: any) => {
   const res = await fetch(API_URL, {
     method: "POST",
     headers: {'Content-Type': 'application/json' },
