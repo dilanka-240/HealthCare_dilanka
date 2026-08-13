@@ -1,10 +1,9 @@
 import React, {useState} from "react";
 import {   View, Text, TextInput, Button, Alert, StyleSheet} from "react-native";
-import {addTreatment} from "../api/TreatmentApi";
+import { addTreatmentApi } from '../api/TreatmentApi';
 
 
-export default function addTreatment () {
-
+export default function AddTreatment () {
   const [treat, setTreat] = useState({
     treatId: "",
     no: "",
@@ -19,7 +18,7 @@ export default function addTreatment () {
 
   const handleSubmit = async() => {
     try{
-      await addTreatment(treat);
+      await addTreatmentApi(treat);
       Alert.alert("Succuess", "Add treatment successfully!");
       setTreat({treatId:"", no:"", treat_date:"", treat_details: ""});
     }catch(err){
@@ -60,8 +59,28 @@ export default function addTreatment () {
         style={styles.input}
       />
 
-      <Button title="Add Examination" onPress={handleSubmit} />
+      <Button title="Add Treatment" onPress={handleSubmit} />
     </View>
   );
+
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    marginBottom: 15,
+    borderRadius: 5,
+  },
+});
 
