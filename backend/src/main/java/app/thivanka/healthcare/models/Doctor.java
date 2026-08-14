@@ -13,8 +13,9 @@ public class Doctor{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String d_name;
+	private String name;
 	private long no;
+	private String password;
 	
 	
 	//setters
@@ -23,12 +24,16 @@ public class Doctor{
 		this.id = id;
 	}
 	
-	public void setDoctorName(String d_name) {
-		this.d_name = d_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public void setNo(Long no) {
 		this.no = no;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	//getters
@@ -37,11 +42,15 @@ public class Doctor{
 		return id;
 	}
 	
-	public String getDoctorName() {
-		return d_name;
+	public String getName() {
+		return name;
 	}
 	
 	public Long getNo() {
 		return no;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 }
