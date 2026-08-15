@@ -8,24 +8,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.thivanka.healthcare.dto.LoginDTO;
-import app.thivanka.healthcare.repositories.DoctorRepository;
+import app.thivanka.healthcare.security.JwtUtil;
 import app.thivanka.healthcare.services.AuthService;
 
 @RestController
 @RequestMapping("/doctor")
-public class DoctorController{
-	
-	@Autowired
-	AuthService authService;
+public class DoctorController {
 
-	public DoctorController(
-			AuthService authService
-			) {
-		this.authService = authService;
-	}
-	
-	@GetMapping("/login")
-	public ResponseEntity<LoginDTO> login(@RequestBody LoginDTO loginDto){
-		return ResponseEntity.ok(authService.login(loginDto));
-	}
+  @Autowired
+  AuthService authService;
+
+  public DoctorController(
+      AuthService authService) {
+    this.authService = authService;
+  }
+
+  @GetMapping("/login")
+  public ResponseEntity<LoginDTO> login(@RequestBody LoginDTO loginDto) {
+
+    String username = JwtUtil.validateToken(loginDto.getRefreshTokne());
+    String newAccessToken = JwtUtil.generateAccessToken(username);
+
+    loginDto.setAccessToken(newAccessToken);
+    return ResponseEntity.ok(authService.login(loginDto));
+  }
 }
