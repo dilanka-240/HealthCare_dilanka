@@ -1,5 +1,7 @@
 package app.thivanka.healthcare.mappers;
 
+import java.util.List;
+
 import app.thivanka.healthcare.dto.PatientDTO;
 import app.thivanka.healthcare.dto.PatientInformationDTO;
 import app.thivanka.healthcare.models.Examination;
@@ -30,8 +32,8 @@ public class PatientMapper{
 	}
 	
 	public static PatientInformationDTO toInfoDto(Patient patient,
-										Examination examination,
-										Treatment treatment) { //to patient information
+		                List<Examination> examination,
+	                  List<Treatment> treatment) { //to patient information
 
 		PatientInformationDTO patientInformationDto = new PatientInformationDTO();
 		patientInformationDto.setName(patient.getName());
