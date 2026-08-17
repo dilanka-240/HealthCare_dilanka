@@ -13,49 +13,51 @@ import app.thivanka.healthcare.repositories.InvestigationRepository;
 import app.thivanka.healthcare.repositories.PatientRepository;
 import app.thivanka.healthcare.repositories.TreatmentRepository;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 @Service
-public class ShowPatientInfoImpl implements ShowPatientInfo{
-	
-	@Autowired
-	private final PatientRepository patientRepository;
-	
-	@Autowired
-	private final InvestigationRepository investigationRepository;
-	
-	@Autowired
-	private final ExaminationRepository examinationRepository;
-	
-	@Autowired
-	private final TreatmentRepository treatmentRepository;
-	
-	
-	
-	public ShowPatientInfoImpl(PatientRepository patientRepository, 
-			InvestigationRepository investigationRepository,
-			ExaminationRepository examinationRepository,
-			TreatmentRepository treatmentRepository) {
+public class ShowPatientInfoImpl implements ShowPatientInfo {
 
-		this.patientRepository = patientRepository;
-		this.investigationRepository = investigationRepository;
-		this.examinationRepository = examinationRepository;
-		this.treatmentRepository = treatmentRepository;
-	}
-	
-	
-	@Transactional
-	public PatientInformationDTO showInformation(Long no) {
-		Patient patient = patientRepository.findByNo(no)
-				.orElseThrow(() -> new RuntimeException("Patient not found"));
+  @Autowired
+  private final PatientRepository patientRepository;
 
-		Examination examination = examinationRepository.findByPatient(patient)
-				.orElseThrow(() -> new RuntimeException("Examination not found"));
-		
-		Treatment treatment = treatmentRepository.findByPatient(patient)
-				.orElseThrow(() -> new RuntimeException("Treatment not found"));
-		
-		return PatientMapper.toInfoDto(patient, examination, treatment);
+  @Autowired
+  private final InvestigationRepository investigationRepository;
 
-	}
+  @Autowired
+  private final ExaminationRepository examinationRepository;
+
+  @Autowired
+  private final TreatmentRepository treatmentRepository;
+
+  public ShowPatientInfoImpl(PatientRepository patientRepository,
+      InvestigationRepository investigationRepository,
+      ExaminationRepository examinationRepository,
+      TreatmentRepository treatmentRepository) {
+
+    this.patientRepository = patientRepository;
+    this.investigationRepository = investigationRepository;
+    this.examinationRepository = examinationRepository;
+    this.treatmentRepository = treatmentRepository;
+  }
+
+  @Transactional
+  public PatientInformationDTO showInformation(Long no) {
+    Patient patient = patientRepository.findByNo(no)
+        .orElseThrow(() -> new RuntimeException("Patient not found"));
+
+    List<Examination> examination = examinationRepository.findByPatient(patient);
+    if (examination.isEmpty()) {
+      throw new Exception("No examination record");
+    }
+
+    List<Treatment> treatment = treatmentRepository.findByPatient(patient);
+    if (treatment.isEmpty()) {
+      throw new Exception("No treatment record");
+    }
+
+    return PatientMapper.toInfoDto(patient, examination, treatment);
+
+  }
 
 }

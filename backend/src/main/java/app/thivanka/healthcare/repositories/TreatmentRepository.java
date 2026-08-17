@@ -6,9 +6,10 @@ import app.thivanka.healthcare.models.Patient;
 import app.thivanka.healthcare.models.Treatment;
 
 import java.util.Optional;
+import java.util.List;
 
 public interface TreatmentRepository extends JpaRepository<Treatment, Long>{
 	
-	Optional<Treatment> findByPatient(Patient patient);
+	List<Treatment> findByPatient(Patient patient);
 	Optional<Treatment> findByTreatId(Long treatId);
 }
