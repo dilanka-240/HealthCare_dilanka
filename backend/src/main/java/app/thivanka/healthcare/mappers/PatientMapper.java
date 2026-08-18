@@ -41,11 +41,8 @@ public class PatientMapper{
 		patientInformationDto.setSex(patient.getSex());
 		patientInformationDto.setOccupation(patient.getOccupation());
 		patientInformationDto.setAllergies(patient.getAllergies());
-		patientInformationDto.setBp(examination.getBp());
-		patientInformationDto.setHp(examination.getHp());
-		patientInformationDto.setWi(examination.getWi());
-		patientInformationDto.setTemp(examination.getTemp());
-		patientInformationDto.setTreatment(treatment.getTreat_details());
+    patientInformationDto.setExamination(examination);
+    patientInformationDto.setTreatment(treatment);
 		return patientInformationDto;
 	}
 	
